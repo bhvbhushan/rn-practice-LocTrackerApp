@@ -11,21 +11,28 @@ import TrackDetailScreen from './src/Screens/TrackDetailScreen';
 import TrackListScreen from './src/Screens/TrackListScreen';
 import { Provider as AuthProvider } from './src/context/AuthContext';
 import { setNavigator } from './src/navigationRef';
+import ResolveAuthScreen from './src/Screens/ResolveAuthScreen';
 
-const switchNavigator = createSwitchNavigator({
-  loginFlow: createStackNavigator({
-    SignUp: SignUpScreen,
-    SignIn: SignInScreen
-  }),
-  mainFlow: createBottomTabNavigator({
-    trackListFlow: createStackNavigator({
-      TrackList: TrackListScreen,
-      TrackDetail: TrackDetailScreen
+const switchNavigator = createSwitchNavigator(
+  {
+    ResolveAuth: ResolveAuthScreen,
+    loginFlow: createStackNavigator({
+      SignUp: SignUpScreen,
+      SignIn: SignInScreen
     }),
-    TrackCreate: TrackCreateScreen,
-    Account: AccountScreen
-  })
-});
+    mainFlow: createBottomTabNavigator({
+      trackListFlow: createStackNavigator({
+        TrackList: TrackListScreen,
+        TrackDetail: TrackDetailScreen
+      }),
+      TrackCreate: TrackCreateScreen,
+      Account: AccountScreen
+    })
+  },
+  {
+    initialRouteName: 'ResolveAuth'
+  }
+);
 
 const App = createAppContainer(switchNavigator);
 
